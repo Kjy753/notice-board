@@ -19,4 +19,6 @@ public interface BoardMapper {
 	
 	public void insertSelectKey(BoardVO board);
 	/* insert 처리되고 생성된 pk 값을 알아야 하는 경우 */
+	
+	public BoardVO read(Long bno);
 }
