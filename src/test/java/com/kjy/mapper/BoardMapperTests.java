@@ -19,9 +19,14 @@ public class BoardMapperTests {
 	
 	@Test
 	public void testGetList() {
-	
+		/* annotation 방식 */
 		mapper.getList().forEach(board -> log.info(board));
 	}
 
+	@Test
+	public void testGetList2() {
+		/* mapper.xml 방식 */
+		mapper.getList2().forEach(board -> log.info(board));
+	}
 
 }
