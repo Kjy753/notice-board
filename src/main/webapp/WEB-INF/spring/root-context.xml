@@ -7,13 +7,24 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-		<!--hikariConfig 기본 jdbc 설정 -->
+	<!--
+	hikariConfig 기본 jdbc 설정 
 		 <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 			<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
 			<property name="username" value="book_ex"></property>
 			<property name="password" value="book_ex"></property>
-		</bean>
+		</bean> 
+		-->
+		 
+		
+		<!-- log4jdbc 적용 설정 -->
+		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+			<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+			<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
+			<property name="username" value="book_ex"></property>
+			<property name="password" value="book_ex"></property>
+		</bean> 
 		
 		<!-- 히카리 데이터소스 -->
 		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
