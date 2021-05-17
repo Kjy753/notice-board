@@ -39,4 +39,10 @@ public class BoardServiceTests {
 		
 		log.info("생성된 게시물의 번호는: "+board.getBno());
 	}
+	
+	@Test
+	public void testGetList() {
+		
+		service.getList().forEach(board -> log.info(board));
+	}
 }
