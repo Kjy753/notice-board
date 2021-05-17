@@ -63,4 +63,9 @@ public class BoardServiceTests {
 		
 		log.info("수정된 게시물 : "+service.get(2L));
 	}
+	
+	@Test
+	public void testDelete() {
+		log.info("제거 "+service.remove(2L));
+	}
 }
