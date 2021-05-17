@@ -49,4 +49,16 @@ public class BoardController {
 		model.addAttribute("board", service.get(bno));
 	}
 	
+	@PostMapping("/modify")
+	public String modigy(BoardVO board, RedirectAttributes rttr) {
+		
+		log.info("modify: "+ board);
+		 
+		if(service.modify(board)) {
+			rttr.addFlashAttribute("reslut","success");
+		}
+		
+		return "redirect:board/list";
+	}
+	
 }
