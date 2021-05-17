@@ -50,4 +50,17 @@ public class BoardServiceTests {
 	public void testGet() {
 		log.info(service.get(7L));
 	}
+	
+	@Test
+	public void testUpdate() {
+		BoardVO board = service.get(2L);
+		if(board == null) {
+			return;
+		}
+		board.setTitle("테스트제목");
+		
+		log.info("수정될 게시물 : "+service.modify(board));
+		
+		log.info("수정된 게시물 : "+service.get(2L));
+	}
 }
