@@ -6,8 +6,8 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/resources/vendor/jquery/jquery.min.js"></script>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -26,7 +26,14 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-      
+        $('#dataTables-example').DataTable({
+            responsive: true
+          });
+          $(".sidebar-nav")
+            .attr("class","sidebar-nav navbar-collapse collapse")
+            .attr("aria-expanded",'false')
+            .attr("style","height:1px");
+
     });
     </script>
 
