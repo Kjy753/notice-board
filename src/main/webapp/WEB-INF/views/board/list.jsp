@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+       
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@include file="../includes/header.jsp" %>
 
             <div class="row">
@@ -20,21 +24,23 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" >
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>BNO</th>
+                                        <th>Title</th>
+                                        <th>Writer</th>
+                                        <th>RegDate</th>
+                                        <th>UpdateDate</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach items="${list}" var="board">
                                     <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
+                                        <td>${board.bno }</td>
+                                        <td>${board.title }</td>
+                                        <td>${board.writer }</td>
+                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/></td>
+                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate }"/></td>
                                     </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
