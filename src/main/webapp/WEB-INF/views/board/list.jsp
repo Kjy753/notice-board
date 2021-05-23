@@ -52,5 +52,12 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-        
+<script type="text/javascript">
+
+$(doucment).ready(function(){
+	
+	var result = '<c:out value="${result}"/>';
+});
+
+</script>
 <%@include file="../includes/footer.jsp" %>
