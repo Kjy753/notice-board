@@ -21,14 +21,15 @@
                         </div>
                         <!-- /.panel-headifng -->
                         <div class="panel-body">
+                           <form>
                         	   <div class="form-group">
 	                           		<label>BNO</label>
-	                           		<input class="form-control" name="title" readonly="readonly" value= '<c:out value="${board.bno}"/>'>
+	                           		<input class="form-control" name="bno" readonly="readonly" value= '<c:out value="${board.bno}"/>'>
 	                           </div>
                         
 	                           <div class="form-group">
 	                           		<label>Title</label>
-	                           		<input class="form-control" name="title" readonly="readonly" value= '<c:out value="${board.title}"/>'>
+	                           		<input class="form-control" name="title"  value= '<c:out value="${board.title}"/>'>
 	                           </div>
 	                           
 	                           <div class="form-group">
@@ -44,7 +45,7 @@
 	                           <button class="btn btn-default" data-oper='modify'>Modify</button>
 	                           <button class="btn btn-danger" data-oper='remove'>Remove</button>
 	                           <button class="btn btn-info" data-oper='list'>List</button> 
-                           
+                           </form>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -55,6 +56,8 @@
 <script>
 $(document).ready(function() {
 	
+	var formobj = $("form");
+	
 	$('.btn').click(function(e){
 		// 기본 동작을 먼저 막아준다.
 		e.preventDefault();
@@ -62,6 +65,18 @@ $(document).ready(function() {
 		var operation = $(this).data("oper");
 		
 		console.log(operation);
+		
+		if(operation === 'list'){
+			self.location = "/board/list";
+		}else if(operation === 'remove'){
+			formobj.attr("action","/board/remove")
+				.attr("method", "post");
+			formobj.submit();
+		}else if(operation === 'modify'){
+			formobj.attr("action","/board/modify")
+			.attr("method", "post");
+		formobj.submit();
+	}
 	});
 		
 	
