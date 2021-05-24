@@ -44,7 +44,7 @@
 	                           <button type="submit" class="btn btn-default"><a href='/board/list'>List</a></button>
 	                           <button type="reset" class="btn btn-default"><a href='/board/modify?bno= <c:out value="${board.bno}"/> '>Modify</a></button> 
                            
-                        </div>
+                        </div> 
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
