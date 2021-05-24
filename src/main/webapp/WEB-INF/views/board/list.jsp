@@ -80,9 +80,12 @@ $(document).ready(function(){
 	
 	checkModal(result);
 	
+	// 뒤로가기 문제 관련 
+	history.replaceState({},null,null);
+	
 	function checkModal(result){
 	
-		if(result === ''){
+		if(result === '' || history.state){
 		
 			return;
 		}
