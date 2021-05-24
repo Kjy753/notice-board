@@ -8,7 +8,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Board Read</h1>
+                    <h1 class="page-header">Board Modify/Delete</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -17,7 +17,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Board Read
+                            Board Modify/Delete
                         </div>
                         <!-- /.panel-headifng -->
                         <div class="panel-body">
@@ -41,8 +41,9 @@
 	                           		<input class="form-control" name="writer" value= '<c:out value="${board.title}"/>'>
 	                           </div>
                            
-	                           <button type="submit" class="btn btn-default">Submit Button</button>
-	                           <button type="reset" class="btn btn-default">Reset Button</button> 
+	                           <button class="btn btn-default" data-oper='modify'>Modify</button>
+	                           <button class="btn btn-danger" data-oper='remove'>Remove</button>
+	                           <button class="btn btn-info" data-oper='list'>List</button> 
                            
                         </div>
                         <!-- /.panel-body -->
@@ -51,5 +52,20 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-        
+<script>
+$(document).ready(function() {
+	
+	$('.btn').click(function(e){
+		// 기본 동작을 먼저 막아준다.
+		e.preventDefault();
+		
+		var operation = $(this).data("oper");
+		
+		console.log(operation);
+	});
+		
+	
+	
+})
+</script>
 <%@include file="../includes/footer.jsp" %>
