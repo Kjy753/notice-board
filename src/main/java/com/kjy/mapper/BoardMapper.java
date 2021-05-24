@@ -8,7 +8,7 @@ import com.kjy.domain.BoardVO;
 
 public interface BoardMapper {
 
-	@Select("select * from tbl_board where bno > 0")
+	@Select("select * from tbl_board order by bno desc")
 	public List<BoardVO> getList();
 	
 	public List<BoardVO> getList2();
