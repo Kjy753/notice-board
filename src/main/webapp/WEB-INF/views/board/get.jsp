@@ -33,16 +33,16 @@
 	                           
 	                           <div class="form-group">
 	                           		<label>Content</label>
-	                           		<textarea rows="5" cols="50" name="content" class="form-control"> '<c:out value="${board.title}"/>'</textarea>
+	                           		<textarea rows="5" cols="50" name="content" class="form-control"> '<c:out value="${board.content}"/>'</textarea>
                                </div>
 	                           
 	                           <div class="form-group">
 	                           		<label>Writer</label>
-	                           		<input class="form-control" name="writer" value= '<c:out value="${board.title}"/>'>
+	                           		<input class="form-control" name="writer" value= '<c:out value="${board.writer }"/>'>
 	                           </div>
                            
-	                           <button type="submit" class="btn btn-default">Submit Button</button>
-	                           <button type="reset" class="btn btn-default">Reset Button</button> 
+	                           <button type="submit" class="btn btn-default"><a href='/board/list'>List</a></button>
+	                           <button type="reset" class="btn btn-default"><a href='/board/modify?bno= <c:out value="${board.bno}"/> '>Modify</a></button> 
                            
                         </div>
                         <!-- /.panel-body -->
