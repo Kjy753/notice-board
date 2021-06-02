@@ -45,7 +45,6 @@
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
-                            
                         </div>
                         <!-- /.panel-body -->
                     </div>

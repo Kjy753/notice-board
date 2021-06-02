@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjy.domain.BoardVO;
 import com.kjy.domain.Criteria;
+import com.kjy.domain.PageDTO;
 import com.kjy.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +37,7 @@ public class BoardController {
 		log.info(cri+"페이지 번호 ");
 		log.info("--------------------------");
 		model.addAttribute("list",service.getList(cri));
+		model.addAttribute("pageMaker",new PageDTO(cri,123));
 	}
 	
 	@GetMapping("/register")

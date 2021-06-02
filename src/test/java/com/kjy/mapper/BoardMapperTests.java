@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kjy.domain.BoardVO;
 import com.kjy.domain.Criteria;
+import com.kjy.domain.PageDTO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -96,5 +97,16 @@ public class BoardMapperTests {
 		List<BoardVO> list = mapper.getListWithPaging(cri);
 		
 		list.forEach(b -> log.info(b));
+	}
+	
+	@Test
+	public void testPageDTO() {
+		
+		Criteria cri = new Criteria();
+		cri.setPageNum(25);
+		
+		PageDTO pageDTO = new PageDTO(cri, 251);
+		
+		log.info(pageDTO);
 	}
 }
