@@ -47,10 +47,18 @@
                             <!-- /.table-responsive -->
                             <h3>${pageMaker }</h3>
                              <div class='pull-right'>
-                            	<ul>
+                            	<ul class="pagination">
+                            	<c:if test="${pageMaker.prev }">
+                            	<li class="page-item "><a class="page-link" href="#" tabindex="-1">Previous</a>
+                            	</li>
+                            	</c:if>
                             		<c:forEach begin="${pageMaker.startPage }" end= "${pageMaker.endPage}" var ="num">
-                            			<li>${num }</li>
+                            			<li class="page-item ${pageMaker.cri.pageNum == num?"active":"" }"><a class="page-link" href="#">${num }</a></li>
                             		</c:forEach>
+                            	<c:if test = "${pageMaker.next }"> 
+                            	<li class="page-item"><a class="page-link" href="#">Next</a>
+                            	</li>
+                            	</c:if>
                             	</ul>
                             </div> 
                         </div>
