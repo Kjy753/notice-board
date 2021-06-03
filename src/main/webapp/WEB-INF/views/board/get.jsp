@@ -56,6 +56,12 @@
 	                        	  actionFrom.find("input[name='bno']").remove();
 	                        	  actionForm.submit();
 	                           });
+	                           
+	                           $(".modifyBtn").click(function(e){	
+		                        	  e.preventDefault();
+		                        	  actionFrom.attr("action","/board/modify");
+		                        	  actionForm.submit();
+		                           });
 	                           </script> 
                            
                         </div> 
