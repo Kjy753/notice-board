@@ -38,7 +38,7 @@ public class BoardController {
 		log.info(cri+"페이지 번호 ");
 		log.info("--------------------------");
 		model.addAttribute("list",service.getList(cri));
-		model.addAttribute("pageMaker",new PageDTO(cri,123));
+		model.addAttribute("pageMaker",new PageDTO(cri,service.getTotal(cri)));
 	}
 	
 	@GetMapping("/register")

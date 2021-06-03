@@ -108,5 +108,10 @@ public class BoardMapperTests {
 		PageDTO pageDTO = new PageDTO(cri, 251);
 		
 		log.info(pageDTO);
+		
+	
 	}
+	
+		
+	
 }
