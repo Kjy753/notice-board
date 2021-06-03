@@ -36,7 +36,7 @@
                                 <c:forEach items="${list}" var="board">
                                     <tr class="odd gradeX">
                                         <td>${board.bno }</td>
-                                        <td><a href='/board/get?bno=<c:out value="${board.bno }"/>'><c:out value="${board.title }"/></a></td>
+                                        <td><a class='move' href='<c:out value="${board.bno }"/>'><c:out value="${board.title }"/></a></td>
                         				<td>${board.writer }</td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/></td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate }"/></td>
@@ -138,6 +138,17 @@ $(document).ready(function(){
 		actionForm.submit();
 		
 	});
+	
+	$(".move").on("click", function(e){
+		e.preventDefault();
+		
+		var targetBno = $(this).attr("href");
+		console.log(targetBno);
+		
+		actionForm.append("<input type='hidden' name='bno' value='"+targetBno+"'>");
+		actionForm.attr("action","/board/get");
+		actionForm.submit();
+	})
 });
 
 </script>
