@@ -67,13 +67,16 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
-	public String modigy(BoardVO board, RedirectAttributes rttr) {
+	public String modigy(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("modify: "+ board);
 		 
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("reslut","success");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
 		
 		return "redirect:/board/list";
 	}
