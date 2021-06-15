@@ -22,7 +22,7 @@
 				</trim>
 			</foreach>
 		</trim>
-</sql>
+</sql> 
 	<select id="getList2" resultType="com.kjy.domain.BoardVO">
 		<![CDATA[
 		select * from tbl_board where bno > 0
@@ -71,7 +71,7 @@
 		from tbl_board
 		where 
 	]]>	
-	<include refid="criteria"></include>	
+	<include refid="criteria"></include>
 	<![CDATA[
 		rownum <= #{pageNum} * #{amount}
 		)

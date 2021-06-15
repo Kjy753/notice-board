@@ -44,8 +44,16 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            <form id='searchForm' action="/board/list" method="get">
+                            			<select name="type">
+                            				<option value="T">제목</option>
+                            			</select>
+                            			<input type='text' name='keyword'>
+                            			<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'>
+                            			<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
+                            			<button class='btn btn-default'>Search</button>
+                            		</form>
                             <!-- /.table-responsive -->
-                            <h3>${pageMaker }</h3>
                              <div class='pull-right'>
                             	<ul class="pagination">
                             	<c:if test="${pageMaker.prev }">
@@ -54,7 +62,7 @@
                             	</c:if>
                             		<c:forEach begin="${pageMaker.startPage }" end= "${pageMaker.endPage}" var ="num">
                             			<li class="page-item ${pageMaker.cri.pageNum == num?"active":"" }"><a class="page-link" href="${num }">${num }</a></li>
-                            		</c:forEach>
+                            		</c:forEach> 		
                             	<c:if test = "${pageMaker.next }"> 
                             	<li class="page-item"><a class="page-link" href="${pageMaker.endPage +1 }" tabindex="-1">Next</a>
                             	</li>
@@ -148,7 +156,16 @@ $(document).ready(function(){
 		actionForm.append("<input type='hidden' name='bno' value='"+targetBno+"'>");
 		actionForm.attr("action","/board/get");
 		actionForm.submit();
-	})
+	});
+	
+	var searchForm = $("#searchForm");
+	
+	$("#searchForm button").on("click", function(e){
+		e.preventDefault();
+		console.log("click............");
+		
+		seachForm.submit();
+	});
 });
 
 </script>
