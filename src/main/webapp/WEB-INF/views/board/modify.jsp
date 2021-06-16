@@ -75,10 +75,14 @@ $(document).ready(function() {
 			
 			var pageNumTag = $("input[name='pageNum']").clone();
 			var amountTag = $("input[name='amount']").clone();
+			var keywordTag = $("input[name='keyword']").clone();
+			var typeTag = $("input[name='type']").clone();
 			
 			formobj.empty();
 			formobj.append(pageNumTag);
 			formobj.append(amountTag);
+			formobj.append(keywordTag);
+			formobj.append(typeTag);
 			
 			formobj.submit();
 			
