@@ -75,12 +75,14 @@ public class BoardController {
 			rttr.addFlashAttribute("reslut","success");
 		}
 		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/board/list";
+		/*
+		 * rttr.addAttribute("pageNum", cri.getPageNum());
+		 * rttr.addAttribute("amount",cri.getAmount()); 
+		 * rttr.addAttribute("type", cri.getType());
+		 * rttr.addAttribute("keyword", cri.getKeyword());
+		 */
+		// 파라미터를 하나의 링크로 연결 -> cri.getListLink()
+		return "redirect:/board/list" + cri.getListLink();
 	}
 	
 	@PostMapping("/remove")
@@ -92,12 +94,14 @@ public class BoardController {
 			rttr.addFlashAttribute("result","success");
 		}
 		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
+		/*
+		 * rttr.addAttribute("pageNum", cri.getPageNum()); 
+		 * rttr.addAttribute("amount",cri.getAmount());
+		 * rttr.addAttribute("type", cri.getType());
+		 * rttr.addAttribute("keyword", cri.getKeyword());
+		 */
 		
-		return "redirect:/board/list";
+		return "redirect:/board/list" + cri.getListLink();
 	}
 	
 }
