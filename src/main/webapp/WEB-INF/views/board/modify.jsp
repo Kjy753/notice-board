@@ -24,6 +24,8 @@
                            <form>
                            	   <input type='hidden' name='pageNum' value='${cri.pageNum }'>
                            	   <input type='hidden' name='amount' value='${cri.amount }'>
+                           	   <input type='hidden' name='type' value = '${cri.type }'>
+	                           <input type='hidden' name='keyword' value = '${cri.keyword }'>
                         	   <div class="form-group">
 	                           		<label>BNO</label>
 	                           		<input class="form-control" name="bno" readonly="readonly" value= '<c:out value="${board.bno}"/>'>
@@ -69,7 +71,17 @@ $(document).ready(function() {
 		console.log(operation);
 		
 		if(operation === 'list'){
-			self.location = "/board/list";
+			formobj.attr("action", "/board/list").attr("method","get");
+			
+			var pageNumTag = $("input[name='pageNum']").clone();
+			var amountTag = $("input[name='amount']").clone();
+			
+			formobj.empty();
+			formobj.append(pageNumTag);
+			formobj.append(amountTag);
+			
+			formobj.submit();
+			
 		}else if(operation === 'remove'){
 			formobj.attr("action","/board/remove")
 				.attr("method", "post");
