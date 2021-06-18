@@ -72,4 +72,13 @@ public class ReplyMapperTests {
 		log.info("update count : " + count);
 		
 	}
+	
+	@Test
+	public void testDelte() {
+		
+		Long targetRno = 1L;
+		
+		mapper.delete(targetRno);
+		
+	}
 }

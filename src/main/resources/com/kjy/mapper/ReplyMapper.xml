@@ -17,5 +17,8 @@
   	update tbl_reply set reply = #{reply}, updatedate = sysdate where rno = #{rno}
   </update>
   
+  <delete id="delete">
+  	delete from tbl_reply where rno = #{rno}
+  </delete>
   </mapper>
  
