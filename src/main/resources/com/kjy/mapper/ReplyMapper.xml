@@ -5,10 +5,13 @@
   <mapper namespace="com.kjy.mapper.ReplyMapper">
   
   <insert id = "insert">
-  
   	insert into tbl_reply (rno,bno,reply,replyer)
   	values (seq_reply.nextval, #{bno}, #{reply}, #{replyer})
-  	
   </insert>
+  
+  <select id="read" resultType="com.kjy.domain.ReplyVO">
+  	select * from tbl_reply where rno = #{rno}
+  </select>
+  
   </mapper>
  
