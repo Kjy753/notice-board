@@ -83,6 +83,16 @@
 		}
 	});
 	
+	replyService.remove(6, function(count){
+		console.log(count);
+		
+		if(count === "sucess"){
+			alert("REMOVED");
+		}
+	}, function(err){
+		alert('ERROR...');
+	});
+	
 </script>
 <script>
 	var actionFrom = $("#actionForm");
