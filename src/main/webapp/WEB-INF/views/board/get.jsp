@@ -49,23 +49,6 @@
 	                           </form>
 	                           <button type="button" class="btn btn-default listBtn"><a href='/board/list'>List</a></button>
 	                           <button type="button" class="btn btn-default modifyBtn"><a href='/board/modify?bno= <c:out value="${board.bno}"/> '>Modify</a></button>
-	                           <script>
-	                           
-	                           var actionFrom = $("#actionForm");
-	                           
-	                           $(".listBtn").click(function(e){	
-	                        	  e.preventDefault();
-	                        	  actionFrom.find("input[name='bno']").remove();
-	                        	  actionForm.submit();
-	                           });
-	                           
-	                           $(".modifyBtn").click(function(e){	
-		                        	  e.preventDefault();
-		                        	  actionFrom.attr("action","/board/modify");
-		                        	  actionForm.submit();
-		                           });
-	                           </script> 
-                           
                         </div> 
                         <!-- /.panel-body -->
                     </div>
@@ -73,5 +56,40 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-        
+<!-- js 모듈 불러오기 -->
+<script type = "text/javascript" src="/resources/js/reply.js"></script>
+<script type = "text/javascript">
+/* reply.js 관련 스크립트 */
+	
+	console.log("=========");
+	console.log("JS TEST");
+	
+	var bnoValue = '<c:out value="${board.bno}"/>'
+	
+	//테스트
+	
+	replyService.add(
+			{reply:"JS Test", replyer:"tester", bno:bnoValue}
+			,
+			function(result){
+				alert("RESULT: "+ result);
+			}
+		);
+	
+</script>
+<script>
+	var actionFrom = $("#actionForm");
+
+	$(".listBtn").click(function(e){	
+		e.preventDefault();
+		actionFrom.find("input[name='bno']").remove();
+		actionForm.submit();
+	});
+
+	$(".modifyBtn").click(function(e){	
+		e.preventDefault();
+		actionFrom.attr("action","/board/modify");
+		actionForm.submit();
+	});
+</script> 
 <%@include file="../includes/footer.jsp" %>
