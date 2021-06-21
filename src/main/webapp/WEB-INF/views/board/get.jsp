@@ -67,7 +67,7 @@
 	var bnoValue = '<c:out value="${board.bno}"/>'
 	
 	//테스트
-	
+	/*
 	replyService.add(
 			{reply:"JS Test", replyer:"tester", bno:bnoValue}
 			,
@@ -92,6 +92,23 @@
 	}, function(err){
 		alert('ERROR...');
 	});
+	
+	replyService.update({
+		rno:22,
+		bno:bnoValue,
+		reply : "Modify Reply..."
+	}, function(result){
+		alert("수정 완료....");
+	});
+	 */
+	
+	replyService.get(25, function(data){
+		console.log("=========");
+		console.log(data);
+		console.log("=========");
+	}); 
+	
+	
 	
 </script>
 <script>
