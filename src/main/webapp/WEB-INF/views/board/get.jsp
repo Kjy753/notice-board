@@ -53,9 +53,33 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+                     <div class = "panel panel-default">
+                    	<div class = "panel-heading">
+                    		<i class = "fa fa-comments fa-fw"></i> Reply
+                    	</div>
+                    	<!-- /.panel-heading -->
+                    	<div class="panel-body">
+                    		<ul class="chat">
+                    		<!-- 댓글 시작점 -->
+                    		<li class ="left clearfix" data-rno ='12'>
+                    		<div>
+                    		<div class="header">
+                    			<strong class="primary-font">user00</strong>
+                    			<small class="pull-right text-muted">2021-06-23 10:34</small>
+                    		</div>
+                    			<p>테스트</p>
+                    		</div>
+                    		</li>                    		
+                    		</ul>
+                    		
+                    	</div>
+                    	<!-- /.panel /.chat -->
+                    </div> 
+                   
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <!-- /.row -->
 <!-- js 모듈 불러오기 -->
 <script type = "text/javascript" src="/resources/js/reply.js"></script>
 <script type = "text/javascript">
