@@ -84,11 +84,35 @@
 <script type = "text/javascript" src="/resources/js/reply.js"></script>
 <script type = "text/javascript">
 /* reply.js 관련 스크립트 */
-	
-	console.log("=========");
-	console.log("JS TEST");
-	
-	var bnoValue = '<c:out value="${board.bno}"/>'
+	$(document).ready(function () {
+		console.log("=========");
+		console.log("JS TEST");
+		
+		var bnoValue = '<c:out value="${board.bno}"/>'
+		var replyUL = $(".chat");
+		
+		showList(1);
+		
+		function showList(page){
+			
+			replyService.getList({bno:bnoValue, page: page || 1}, function(list) {
+				
+				var str = "";
+				if(list == null || list.length == 0){
+					replyUL.html("");
+					return;
+				}
+				
+				for( var i = 0, len = list.length || 0; i < len; i++){
+					str += "<li class ='left clearfix' data-rno='" + list[i].rno+"'>";
+					str += "  <div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
+					str += "   <small class='pull-right text-muted'>"+list[i].replyDate+"</small></div>";
+					str += "   <p>"+list[i].reply+"</p></div></li>";
+				}
+				replyUL.html(str);
+			});
+		}
+	});
 	
 	//테스트
 	/*
@@ -124,18 +148,20 @@
 	}, function(result){
 		alert("수정 완료....");
 	});
-	 */
+	 
 	
 	replyService.get(25, function(data){
 		console.log("=========");
 		console.log(data);
 		console.log("=========");
 	}); 
-	
+	*/
 	
 	
 </script>
+
 <script>
+
 	var actionFrom = $("#actionForm");
 
 	$(".listBtn").click(function(e){	
