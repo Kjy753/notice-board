@@ -99,7 +99,7 @@ var replyService = (function(){
 		var dateObj = new Date(timeValue);
 		var str = "";
 		
-		if(gep < (1000 * 60 * 60 * 24)){
+		if(gap < (1000 * 60 * 60 * 24) ){
 			
 			var hh = dateObj.getHours();
 			var mi = dateObj.getMinutes();
@@ -122,6 +122,6 @@ var replyService = (function(){
 		remove : remove,
 		update : update,
 		get : get,
-		displayTime : displayTIme
+		displayTime : displayTime
 		};
 })();
