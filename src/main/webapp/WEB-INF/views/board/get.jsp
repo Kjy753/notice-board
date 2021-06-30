@@ -54,8 +54,12 @@
                     </div>
                     <!-- /.panel -->
                      <div class = "panel panel-default">
-                    	<div class = "panel-heading">
+                    	<!-- <div class = "panel-heading">
                     		<i class = "fa fa-comments fa-fw"></i> Reply
+                    	</div> -->
+                    	<div class="panel-heading">
+                    	<i class="fa fa-comments fa-fw"></i> Reply
+                    		<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
                     	</div>
                     	<!-- /.panel-heading -->
                     	<div class="panel-body">
@@ -80,6 +84,42 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    	<div class="modal-dialog">
+        	<div class="modal-content">
+            	<div class="modal-header">
+                	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+                </div>
+                <div class="modal-body">
+                	<div class="form-group">
+                	<label>Reply</label>
+                	<input class= "form-control" name='reply' value = 'New Reply!!!'>
+                	</div>
+                	
+                	<div class="form-group">
+                	<label>Replyer</label>
+                	<input class= "form-control" name='replyer' value = 'replyer'>
+                	</div>
+                	<div class="form-group">
+                	<label>Reply Date</label>
+                	<input class= "form-control" name='replyDate' value = ''>
+                	</div>
+                	
+                </div>
+                    <div class="modal-footer">
+                    	<button id='modalModBtn' type="button" class="btn btn-warining">Modify</button>
+                    	<button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
+                    	<button id='modalCloseBtn' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    	<button id='modalClassBtn' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                	</div>
+            </div>
+            <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->            
 <!-- js 모듈 불러오기 -->
 <script type = "text/javascript" src="/resources/js/reply.js"></script>
 <script type = "text/javascript">
