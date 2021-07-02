@@ -228,6 +228,20 @@
 				showList(1);
 			});
 		});
+		
+		modalRemoveBtn.on("click", function(e){
+			
+			var rno = modal.data("rno");
+			
+			replyService.remove(rno, function(result){
+				
+				alert(result);
+				
+				modal.modal("hide");
+				showList(1);
+			
+			});
+		});
 });
 	
 	//테스트
