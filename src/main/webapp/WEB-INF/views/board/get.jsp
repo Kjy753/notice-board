@@ -85,7 +85,8 @@
             </div>
             <!-- /.row -->
 <!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	  aria-labelledby="myModalLabel" aria-hidden="true">
     	<div class="modal-dialog">
         	<div class="modal-content">
             	<div class="modal-header">
@@ -111,22 +112,21 @@
                     <div class="modal-footer">
                     	<button id='modalModBtn' type="button" class="btn btn-warining">Modify</button>
                     	<button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
-                    	<button id='modalCloseBtn' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    	<button id='modalClassBtn' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    	<button id='modalCloseBtn' type="button" class="btn btn-default" >Close</button>
+                    	<button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
                 	</div>
             </div>
             <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal -->            
+            <!-- /.modal  -->
+                   
 <!-- js 모듈 불러오기 -->
 <script type = "text/javascript" src="/resources/js/reply.js"></script>
 <script type = "text/javascript">
 /* reply.js 관련 스크립트 */
 	$(document).ready(function () {
-		console.log("=========");
-		console.log("JS TEST");
 		
 		var bnoValue = '<c:out value="${board.bno}"/>'
 		var replyUL = $(".chat");
@@ -152,6 +152,48 @@
 				replyUL.html(str);
 			});
 		}
+		
+		var modal = $(".modal");
+		var modalInputReply = modal.find("input[name='reply']");
+		var modalInputReplyer = modal.find("input[name='replyer']");
+		var modalInputReplyDate = modal.find("input[name='replyDate']");
+		
+		var modalModBtn = $("#modalModBtn");
+		var modalRemoveBtn = $("#modalRemoveBtn");
+		var modalRegisterBtn = $("#modalRegisterBtn");
+		
+	
+		$("#addReplyBtn").on("click", function(e){
+			console.log("=========");
+			console.log("addReplyBtn  TEST");
+			modal.find("input").val("");
+			modalInputReplyDate.closest("div").hide();
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			
+			modalRegisterBtn.show();
+			
+			$(".modal").modal("show");
+		});
+		
+		modalRegisterBtn.on("click", function(e){
+
+			var reply = {
+					reply: modalInputReply.val(),
+					replyer: modalInputReplyer.val(),
+					bno:bnoValue
+			};
+			
+			replyService.add(reply, function(result){
+				alert(result);
+				
+				modal.find("input").val("");
+				modal.modal("hide");
+				
+				// 댓글 추가시 댓글 목록 갱신을 위해 추가
+				showList(1);
+			});
+		});
+		
 	});
 	
 	//테스트
@@ -166,7 +208,7 @@
 	
 	replyService.getList(
 			{bno:bnoValue, page:1}, function(list){
-				for(var i = 0, len = list.length||0; i<len; i++){
+				for(var i = 0, len 	= list.length||0; i<len; i++){
 				console.log(list[i]);
 		}
 	});
