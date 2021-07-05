@@ -78,6 +78,9 @@
                     		
                     	</div>
                     	<!-- /.panel /.chat -->
+                    	<div class="panel-footer">
+                    	<h3>바닥부분	</h3>
+                    	</div>
                     </div> 
                    
                 </div>
@@ -135,11 +138,22 @@
 		
 		function showList(page){
 			
-			replyService.getList({bno:bnoValue, page: page || 1}, function(list) {
+			replyService.getList({bno:bnoValue, page: page || 1}, function(replyCnt, list) {
+				//console.log(========댓글 목록 불러오기========);
+				console.log("replyCnt:" + replyCnt);
+				console.log("list: " + list);
+				console.log(list);
+				
+				if(page == -1){
+					pageNum = Math.ceil(replyCnt/10.0);
+					showList(pageNum);
+					return;
+				}
 				
 				var str = "";
+				
 				if(list == null || list.length == 0){
-					replyUL.html("");
+					//replyUL.html("");
 					return;
 				}
 				
@@ -150,6 +164,8 @@
 					str += "   <p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);
+				
+				showReplyPage(replyCnt);
 			});
 		}
 		
@@ -190,7 +206,8 @@
 				modal.modal("hide");
 				
 				// 댓글 추가시 댓글 목록 갱신을 위해 추가
-				showList(1);
+				//showList(1);
+				showList(-1); // 새댓글 추가시 목록 -1을 넣어서 전체 댓글의 숫자를 먼저 파악
 			});
 		});
 		
@@ -241,6 +258,61 @@
 				showList(1);
 			
 			});
+		});
+		// 댓글 페이지번호를 출력 하기 위한 로직
+		var pageNum = 1;
+		var replyPageFooter = $(".panel-footer");
+		
+		function showReplyPage(replyCnt){
+			console.log("페이지번호출력");
+			var endNum = Math.ceil(pageNum / 10.0) * 10;
+			
+			var startNum = endNum -9;
+			
+			var prev = startNum != 1; 
+			var next = false; 
+			
+			if(endNum * 10 >= replyCnt){
+				endNum = Math.ceil(replyCnt/10.0);
+			}
+			
+			if(endNum * 10 < replyCnt){
+				next = true;
+			}
+			
+			var str = "<ul class='pagination pull-right'>";
+			
+			if(prev){
+				str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
+				
+			}
+			
+			for(var i = startNum; i<=endNum; i++){
+				var active = pageNum ==i? "active":"";
+				
+				str+="<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+			}
+			
+			if(next){
+				str+="<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>Next</a></li>";
+			}
+			
+			str +="</ul></div>"
+			console.log(str);
+			replyPageFooter.html(str);
+		}
+		
+		replyPageFooter.on("click","li a", function(e){
+			e.preventDefault();
+			console.log("page click");
+			
+			var targetPageNum = $(this).attr("href");
+			
+			console.log("targetPageNum: " + targetPageNum);
+			
+			pageNum = targetPageNum;
+			
+			showList(pageNum);
 		});
 });
 	
