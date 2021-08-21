@@ -1,6 +1,10 @@
 package com.kjy.aop;
 
+import java.util.Arrays;
+
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -32,4 +36,27 @@ public class LogAdvice {
 		log.info("exception: " +exception);
 	}
 	
+	@Around("execution(* com.kjy.service.SampleService*.*(..))")
+	public Object logTime( ProceedingJoinPoint pjp) {
+		// 직접 대상 메서드를 실행할 수 있는 권한을 가지고 메서드의 실핸 전과 실행 후 처리가 가능. 
+		long start = System.currentTimeMillis();
+		
+		log.info("Target: " + pjp.getTarget());
+		log.info("Param: " + Arrays.toString(pjp.getArgs()));
+		
+		//invoke Method
+		Object result = null;
+		
+		try {
+			result = pjp.proceed();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		long end = System.currentTimeMillis();
+		
+		log.info("TIME: " + (end - start));
+		
+		return result;
+	}
 }
