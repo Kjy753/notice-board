@@ -24,4 +24,13 @@ public class SampleServiceTests {
 		log.info(service);
 		log.info(service.getClass().getName());
 	}
+	
+	@Test 
+	public void testAdd()throws Exception {
+		log.info(service.doAdd("123","456"));
+		//@AfterThrowing 실행을 위해 에러 발생
+		//log.info(service.doAdd("123","ABC"));
+	}
+	
+	
 }
