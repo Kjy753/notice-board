@@ -1,5 +1,7 @@
 package com.kjy.controller;
 
+import java.io.File;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +23,22 @@ public class UploadController {
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model	) {
 		
+		String uploadFolder = "D:\\upload";  // 업로드할 폴더 경로
+		
 		for( MultipartFile multipartFile : uploadFile) {
 			
 			log.info("---------------------------");
 			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
 			log.info("Upload File Size: " + multipartFile.getSize());
-		}
+			
+			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename()); // 저장될파일 
+			
+			try {
+				multipartFile.transferTo(saveFile);
+			}catch(Exception e) {
+				log.error(e.getMessage());
+			}//end catch
+		
+		} //end for
 	}
 }
