@@ -47,4 +47,34 @@ public class UploadController {
 		 
 		log.info("upload ajax");
 	}
+	
+	@PostMapping("/uploadAjaxAction")
+	public void uploadAjaxPost(MultipartFile[] uploadFile) {
+		
+		log.info("update ajax post................");
+		
+		String uploadFolder = "D:\\upload"; // 업로드할 폴더 경로
+		
+		for(MultipartFile multipartFile: uploadFile) {
+			log.info("------------------------");
+			log.info("Upload File name: " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size: " + multipartFile.getSize());
+			
+			String uploadFileName = multipartFile.getOriginalFilename();
+			
+			// IE로 연결시 file path 
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			log.info("only file name: " + uploadFileName);
+			
+			File saveFile = new File(uploadFolder, uploadFileName); 
+			
+			try {
+				multipartFile.transferTo(saveFile);
+			}catch(Exception e) {
+				log.error(e.getMessage());
+			}//end catch
+			
+		} // end for
+		
+	}
 }

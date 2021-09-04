@@ -32,6 +32,23 @@ $(document).ready(function(){
 		
 		console.log(files);
 		
+		// formdata 객체를 통해 파일을 전송 하는 방식 
+		for(var i = 0; i < files.length; i++){
+			
+			formData.append("uploadFile", files[i]);
+		}
+		
+		$.ajax({
+			url: '/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type: 'POST',
+			success: function(result){
+				alert("Uploaded");
+			}
+		}); //$.ajax
+		
 	});
 });
 </script>
