@@ -49,7 +49,7 @@ $(document).ready(function(){
 		var files = inputFile[0].files;
 		
 		console.log(files);
-		
+			
 		// formdata 객체를 통해 파일을 전송 하는 방식 
 		for(var i = 0; i < files.length; i++){
 				
