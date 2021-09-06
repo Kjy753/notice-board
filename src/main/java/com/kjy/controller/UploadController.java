@@ -3,6 +3,7 @@ package com.kjy.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -88,6 +89,9 @@ public class UploadController {
 			// IE로 연결시 file path 
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			log.info("only file name: " + uploadFileName);
+			
+			UUID uuid = UUID.randomUUID(); // 중복된 이름을 업로드시 덮어쓰기가 아닌 새로운 파일로 인식하기위한 랜덤 아이디값 uuid 생성 
+			uploadFileName = uuid.toString() + "_" + uploadFileName;  //  랜덤값 + "_" + 파일 이름 형식으로 다시 작성 
 			
 			//File saveFile = new File(uploadFolder, uploadFileName);
 			File saveFile = new File(uploadPath, uploadFileName); // 파일을 uploadPath를 통해 년/월/일 폴더를 생성해 파일 을 저장
