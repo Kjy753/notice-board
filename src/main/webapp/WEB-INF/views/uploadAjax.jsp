@@ -12,6 +12,10 @@
 <div class='uploadDiv'>
 	<input type='file' name='uploadFile' multiple>
 </div>
+	<div class='uploadResult'>
+		<ul>
+		</ul>
+	</div>
 
 <button id='uploadBtn'>Upload</button>
 
@@ -70,11 +74,25 @@ $(document).ready(function(){
 				success: function(result){
 					console.log(result);
 					
+					showUploadedFile(result);
+					
 					$(".uploadDiv").html(cloneObj.html()); // 복사한 div를 다시 붙여넣어준다.
 				}
 		}); //$.ajax
 		
 	});
+	
+	var uploadResult = $(".uploadResult ul");
+	
+	function showUploadedFile(uploadResultArr){
+		
+		var str = "";
+		
+		$(uploadResultArr).each(function(i,obj){
+			str += "<li>" + obj.fileName + "</li>";
+		});
+		uploadResult.append(str);
+	}
 });
 </script>
 </body>
