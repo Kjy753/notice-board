@@ -39,6 +39,7 @@ $(document).ready(function(){
 		}
 		return true;
 	}
+	var cloneObj = $(".uploadDiv").clone();  // uploadDiv 객체를 복사
 	
 	$("#uploadBtn").on("click", function(e){
 	
@@ -64,10 +65,13 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false,
 			data: formData,
-			type: 'POST',
-			success: function(result){
-				alert("Uploaded");
-			}
+				type: 'POST',
+				dataType : 'json',
+				success: function(result){
+					console.log(result);
+					
+					$(".uploadDiv").html(cloneObj.html()); // 복사한 div를 다시 붙여넣어준다.
+				}
 		}); //$.ajax
 		
 	});
