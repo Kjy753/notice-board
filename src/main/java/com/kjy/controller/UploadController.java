@@ -10,11 +10,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -151,5 +153,28 @@ public class UploadController {
 		} // end for
 		return new ResponseEntity<>(list, HttpStatus.OK);
 		
+	}
+	
+	@GetMapping("/display")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile(String fileName){  // 특정한 파일 이름을 받아서 이미지 데이터를 전송하는 컨트롤러 
+		log.info("fileName: " + fileName);
+		
+		File file = new File("D:\\upload\\" + fileName);
+
+		log.info("file: " + file);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			HttpHeaders header = new HttpHeaders();
+			
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
