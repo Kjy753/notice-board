@@ -3,6 +3,7 @@ package com.kjy.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -190,7 +191,17 @@ public class UploadController {
 		
 		log.info("resource: " + resource);
 		
-		return null;
+		String resourceName = resource.getFilename(); // 다운로드될 파일 이름
+		
+		HttpHeaders headers = new HttpHeaders(); //httpHeaders 객체를 생성 
+		try {
+			headers.add("Content-Disposition", "attachment; filename=" +new String(resourceName.getBytes("UTF-8"),"ISO-8859-1"));
+						// 다운로드시 저장되는 이름 지정, 다운로드되는 파일이름 아직 IE 에서는 에러가 발생 할 예정i
+		}catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Resource>(resource,headers, HttpStatus.OK);
+		
 		
 	}
 }
