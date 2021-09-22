@@ -68,7 +68,7 @@ $(document).ready(function(){
 		return true;
 	}
 	var cloneObj = $(".uploadDiv").clone();  // uploadDiv 객체를 복사
-	
+
 	$("#uploadBtn").on("click", function(e){
 	
 		var formData = new FormData();
@@ -108,15 +108,19 @@ $(document).ready(function(){
 	
 	var uploadResult = $(".uploadResult ul");
 	
-	function showUploadedFile(uploadResultArr){
+	 function showUploadedFile(uploadResultArr){
 		
 		var str = "";
 		
 		$(uploadResultArr).each(
 			function(i,obj){
 			if(!obj.image){
-				str += "<li><img src='/resources/img/attach.png'>" + obj.fileName + "</li>";
 				
+				var fileCallPath = encodeURIComponent( obj.uploadPath+"/"+obj.uuid + "_" + obj.fileName);
+				
+				str += "<li><a href='/download?fileName="+fileCallPath+"'>"						
+						+"<img src='/resources/img/attach.png'>"+obj.fileName+"</a></li>"
+						
 			}else {
 				//str += "<li>" + obj.fileName + "</li>";
 				var fileCallPath = encodeURIComponent( obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
@@ -125,7 +129,8 @@ $(document).ready(function(){
 				
 			}
 				
-		});
+		}); 
+		    
 		uploadResult.append(str);
 	}
 });
