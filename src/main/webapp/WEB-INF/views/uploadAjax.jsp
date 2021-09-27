@@ -18,7 +18,7 @@
 }
 
 .uploadResult ul{
-	display : flax;
+	display : flex;
 	flex-flow : row;
 	justify-content : center;
 	align-items : center;
@@ -27,12 +27,44 @@
 .uploadResult ul li{
 	list-style : none;
 	padding : 10px;
+	aligin-content: center;
+	text-align: center;
 }
 
 .uploadResult ul li img{
-	width :20px;
+	width : 20px;
+}
+.uploadResult ul li span {
+	color: white;
+}
+
+
+.bigPictureWrapper {
+	position: absolute;
+	display: none; 
+	justify-content: center;
+	align-items: center;
+	top: 0%;
+	width: 100%;
+	heighit: 100%;
+	background-color: gray;
+	z-index: 100;
+	background: rgba(255,255,255,0.5);
+}
+.bigPicture{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-tiems: center;
+}
+.bigPicture img{
+	width: 600px;
 }
 </style>
+<div class='bigPictureWrapper'>
+  <div class='bigPicture'>
+  </div>
+</div>
 <div class='uploadDiv'>
 	<input type='file' name='uploadFile' multiple>
 </div>
@@ -49,6 +81,25 @@
      crossorigin="anonymous"></script>
      
 <script>
+
+function showImage(fileCallPath){
+	 //alert(fileCallPath);
+	 
+	 $(".bigPictureWrapper").css("display","flex").show();
+	 
+	 $(".bigPicture")
+	 .html("<img src='/display?fileName="+ encodeURI(fileCallPath)+"'>")
+	 .animate({width:'100%', height: '100%'}, 1000);
+	 
+	 $(".bigPictureWrapper").on("click",function(e){
+		$(".bigPicture").animate({width:'100%', height: '100%'}, 1000);
+		setTimeout(function(){
+			$('.bigPictureWrapper').hide();
+		},1000);
+	 });
+	}
+
+
 $(document).ready(function(){
 	
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|zlz)$"); // 정규식을 통한 exe,sh,zip 검사
@@ -125,9 +176,13 @@ $(document).ready(function(){
 				//str += "<li>" + obj.fileName + "</li>";
 				var fileCallPath = encodeURIComponent( obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
 				
-				str += "<li><img src='/display?fileName="+fileCallPath+"' <li>";
+				// 원본이미지 경로
+				var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName; 
+				originPath = originPath.replace(new RegExp(/\\/g),"/");
 				
-			}
+				str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'></a><li>";
+				console.log(originPath);
+				}
 				
 		}); 
 		    
