@@ -199,22 +199,26 @@ public class UploadController {
 		
 		String resourceName = resource.getFilename(); // 다운로드될 파일 이름
 		
+		// uuid 제거
+		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_")+1); 
+		
 		HttpHeaders headers = new HttpHeaders(); //httpHeaders 객체를 생성 
 		try {
 			String downloadName = null;
 			
 			if(userAgent.contains("Trident")) {
 				log.info("IE browser");
-				downloadName = URLEncoder.encode(resourceName, "UTF-8").replaceAll("\\+"," ");
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8").replaceAll("\\+"," ");
 			}else if(userAgent.contains("Edge")) {
 				log.info("Edge browser");
 				
-				downloadName = URLEncoder.encode(resourceName, "UTF-8");
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8");
 			}else {
 				log.info("Chrome browser");
-				downloadName =new String(resourceName.getBytes("UTF-8"),"ISO-8859-1");
+				downloadName =new String(resourceOriginalName.getBytes("UTF-8"),"ISO-8859-1");
 				
 			}
+			log.info("downloadName: " + downloadName);
 			headers.add("Content-Disposition", "attachment; filename=" +downloadName);
 						// 다운로드시 저장되는 이름 지정, 다운로드되는 파일이름 아직 IE 에서는 에러가 발생 할 예정i
 		}catch(UnsupportedEncodingException e) {
