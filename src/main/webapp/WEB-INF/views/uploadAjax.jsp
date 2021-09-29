@@ -119,7 +119,7 @@ $(".uploadResult").on("click","span", function(e){
 
 $(document).ready(function(){
 	
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|zlz)$"); // 정규식을 통한 exe,sh,zip 검사
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$"); // 정규식을 통한 exe,sh,zip 검사
 	var maxSize = 5242880; // 5MB
 	
 	function checkExtension(fileName, fileSize){
