@@ -215,7 +215,7 @@ $(document).ready(function (e){
 					
 						str += "<li><div>";
 						str += "<span>" + obj.fileName+"</span>";
-						str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+						str += "<button type='button'data-file=\'"+fileCallPath+"\' data-type='image'  class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 						str += "<img src='/display?fileName="+fileCallPath+"'>";
 						str += "</div>";
 						str + "</li>";
@@ -226,7 +226,7 @@ $(document).ready(function (e){
 						
 						str += "<li><div>";
 						str += "<span> "+ obj.filName+"</span>";
-						str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+						str += "<button type='button'  class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 						str += "<img src='/resources/img/attach.png'></a>";
 						str += "</div>";
 						str + "</li>";
@@ -239,7 +239,27 @@ $(document).ready(function (e){
 		uploadUL.append(str);
 		}
 	
-
+		$(".uploadResult").on("click","button", function(e){
+			console.log("delete file");
+			
+			var targetFile = $(this).data("file");
+			var type =$(this).data("type");
+			
+			var targetLi = $(this).closest("li");
+			
+			$.ajax({
+				url: '/deleteFile',
+				data: {fileName: targetFile, type: type},
+				dataType: 'text',
+				type: 'POST',
+				success:function(result){
+					alert(result);
+					targetLi.remove();
+				}
+			}); //$.ajax
+			
+		});
+		//$.uploadResult
 	
 });
 /* end.ready */
