@@ -73,7 +73,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                           <form action="/board/register" method="post">
+                           <form role="form" action="/board/register" method="post">
 	                           <div class="form-group">
 	                           		<label>Title</label>
 	                           		<input class="form-control" name="title">
@@ -127,13 +127,21 @@ $(document).ready(function (e){
 	var formObj = $("form[role='form']");
 	
 	$("button[type='submit']").on("click", function(e){
+			
 		e.preventDefault();
+		
 		console.log("submit clicked");
 		
 		var str = ""; 
-		$(".uploadResult ul li").each(function(i,obj){
+		
+		$(".uploadResult ul li").each(function(i, obj){
+					
 			var jobj = $(obj); 
-			console.dir(jobj); 
+		
+			 console.dir(jobj);
+		     console.log("-------------------------");
+		     console.log(jobj.data("filename"));
+			
 			
 			str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
 			str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
@@ -141,7 +149,12 @@ $(document).ready(function (e){
 		    str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
 		});
 		//$(".uploadResult ul li")
-		formObj.append(str).submit;
+		 console.log("<=========================");
+		console.log(str);
+		console.log("<========================="); 
+		
+		formObj.append(str).submit();
+		
 	});
 	// 파일 업로드 
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$"); // 정규식을 통한 exe,sh,zip 검사
@@ -184,7 +197,7 @@ $(document).ready(function (e){
 			processData: false,
 			contentType: false,data:
 				formData,type: 'POST',
-				dataType : 'json',
+				dataType: 'json',
 				success: function(result){
 					console.log(result);
 					
@@ -196,7 +209,7 @@ $(document).ready(function (e){
 	/* end.input[type='file'] */
 	
 	 function showUploadResult(uploadResultArr){
-		if(!uploadResultArr || uploadResultArr.length == 0){ retunr;}
+		if(!uploadResultArr || uploadResultArr.length == 0){ return;}
 		
 		var uploadUL = $(".uploadResult ul");
 		
@@ -223,10 +236,10 @@ $(document).ready(function (e){
 					} */
 					
 					if(obj.image){
-					
+						
 						var fileCallPath = encodeURIComponent(obj.uploadPath+ "/s_"+obj.uuid+"_"+obj.fileName);
 					
-						str += "<li data-path='"+obj.ploadPath+"'";
+						str += "<li data-path='"+obj.uploadPath+"'";
 						str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
 						str += "><div>";
 						str += "<span>" + obj.fileName+"</span>";
@@ -234,8 +247,9 @@ $(document).ready(function (e){
 						str += "<img src='/display?fileName="+fileCallPath+"'>";
 						str += "</div>";
 						str + "</li>";
+						
 					}else{
-						/* imag 아닌 다른 파일 일경우 */
+						
 						var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
 						var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
 						
@@ -247,11 +261,9 @@ $(document).ready(function (e){
 						str += "</div>";
 						str + "</li>";
 						
-						
 					}
 					
 			}); 
-			    
 		uploadUL.append(str);
 		}
 	

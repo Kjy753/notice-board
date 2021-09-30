@@ -201,7 +201,7 @@ $(document).ready(function(){
 				}
 				
 		}); 
-		    
+		    console.log(str);
 		uploadResult.append(str);
 	}
 	 
