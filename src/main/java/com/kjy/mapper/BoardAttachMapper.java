@@ -13,4 +13,8 @@ public interface BoardAttachMapper {
 	public void delete(String uuid);
 	// 특정 게시물번호로 찾기
 	public List<BoardAttachVO> findByBno(Long bno);
+	
+	// 첨부파일 삭제 
+	public void deleteAll(Long bno);
+	
 }
