@@ -8,20 +8,20 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Board Modify/Delete</h1>
+                    <h1 class="page-header">Board Modify</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Board Modify/Delete
-                        </div>
+                    
+                        <div class="panel-heading">Board Modify</div>
                         <!-- /.panel-headifng -->
                         <div class="panel-body">
-                           <form>
+                           <form role="form" action="/board/modify" method="post">
                            	   <input type='hidden' name='pageNum' value='${cri.pageNum }'>
                            	   <input type='hidden' name='amount' value='${cri.amount }'>
                            	   <input type='hidden' name='type' value = '${cri.type }'>
@@ -46,9 +46,9 @@
 	                           		<input class="form-control" name="writer" value= '<c:out value="${board.title}"/>'>
 	                           </div>
                            
-	                           <button class="btn btn-default" data-oper='modify'>Modify</button>
-	                           <button class="btn btn-danger" data-oper='remove'>Remove</button>
-	                           <button class="btn btn-info" data-oper='list'>List</button> 
+	                           <button type="submit" class="btn btn-default" data-oper='modify'>Modify</button>
+	                           <button type="submit" class="btn btn-danger" data-oper='remove'>Remove</button>
+	                           <button type="submit" class="btn btn-info" data-oper='list'>List</button> 
                            </form>
                         </div>
                         <!-- /.panel-body -->
