@@ -23,7 +23,7 @@
 	</select>
 
 	<delete id="deleteAll">
-		delete tbl_attach where vono =#{bno}
+		delete tbl_attach where bno =#{bno}
 	</delete>
 </mapper>
 
