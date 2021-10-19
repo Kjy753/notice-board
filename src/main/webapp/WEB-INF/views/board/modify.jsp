@@ -134,7 +134,7 @@
 <script>
 $(document).ready(function() {
 	
-	var formobj = $("form");
+	var formObj = $("form");
 	
 	$('.btn').click(function(e){
 		// 기본 동작을 먼저 막아준다.
@@ -145,25 +145,25 @@ $(document).ready(function() {
 		console.log(operation);
 		
 		if(operation === 'list'){
-			formobj.attr("action", "/board/list").attr("method","get");
+			formObj.attr("action", "/board/list").attr("method","get");
 			
 			var pageNumTag = $("input[name='pageNum']").clone();
 			var amountTag = $("input[name='amount']").clone();
 			var keywordTag = $("input[name='keyword']").clone();
 			var typeTag = $("input[name='type']").clone();
 			
-			formobj.empty();
-			formobj.append(pageNumTag);
-			formobj.append(amountTag);
-			formobj.append(keywordTag);
-			formobj.append(typeTag);
+			formObj.empty();
+			formObj.append(pageNumTag);
+			formObj.append(amountTag);
+			formObj.append(keywordTag);
+			formObj.append(typeTag);
 			
 		}else if(operation === 'remove'){
-			formobj.attr("action","/board/remove");
+			formObj.attr("action","/board/remove");
 		
 		}else if(operation === 'modify'){
 		
-			consol.log("submit clicked");
+			console.log("submit clicked");
 			
 			var str = "";
 			
