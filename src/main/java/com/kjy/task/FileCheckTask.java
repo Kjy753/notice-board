@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 @Component
 public class FileCheckTask {
 	
-	@Setter(onMethod_ = {@Autowried})
+	@Setter(onMethod_ = {@Autowired})
 	private BoardAttachMapper attachMapper;
 	
 	private String getFolderYesterDay() {
