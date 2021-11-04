@@ -11,6 +11,11 @@
 	
 	<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
 	
+	<!-- 권한 부여 -->
+	<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+	
+	<!-- 접근 제한시 AccessDeniedHandler을 구현하거나 특정 URI 를 지정 -->
+	<security:access-denied-handler error-page="/accessError"/>
 	<security:form-login/>
 </security:http>
 <security:authentication-manager>
@@ -18,6 +23,9 @@
 	<security:authentication-provider>
 		<security:user-service>
 			<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+			
+			<!-- admin 접속 권한 설정 -->
+			<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
 		</security:user-service>
 	</security:authentication-provider>
 
