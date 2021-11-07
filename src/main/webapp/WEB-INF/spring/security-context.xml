@@ -6,7 +6,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 <bean id="customAccessDenied" class="com.kjy.security.CustomAccessDeniedHandler"></bean>
-
+<bean id="customLoginSuccess" class="com.kjy.security.CustomLoginSuccessHandler"></bean>
+		  
 <security:http>
 	<!-- 특정 URL 에 접근할 때 인터셉터를 이용해서 접근을 제한하는 설정, pattern 은 URI 의 패턴을 의미  access의 경우는 권한을 체크 -->
 	<security:intercept-url pattern="/sample/all" access="permitAll"/>
@@ -20,7 +21,11 @@
 	<!-- <security:access-denied-handler error-page="/accessError"/> -->
 	<security:access-denied-handler ref="customAccessDenied"/>
 	<!-- 커스텀 로그인  -->
-	<security:form-login login-page="/customLogin"/>
+	<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
+	
+	
+	<!-- csrf 토큰을 사용하지 않을 경우 설정 -->
+	<!-- <security:csrf disabled="true"/> -->
 </security:http>
 <security:authentication-manager>
 

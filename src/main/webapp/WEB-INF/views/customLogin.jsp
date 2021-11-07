@@ -11,10 +11,10 @@
 <body>
 
 <h1>Custom Login Page</h1>
-<h2><c:out value="${error }"/></h2>
-<h2><c:out value="${logout }"/></h2>
+<h2><c:out value="${error}"/></h2>
+<h2><c:out value="${logout}"/></h2>
 
-<form method='post' acthin="/login">
+<form method='post' action="/login">
 
 <div>
 	<input type='text' name='username' value='admin'>
