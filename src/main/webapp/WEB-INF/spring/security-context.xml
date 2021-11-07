@@ -7,6 +7,7 @@
 
 <bean id="customAccessDenied" class="com.kjy.security.CustomAccessDeniedHandler"></bean>
 <bean id="customLoginSuccess" class="com.kjy.security.CustomLoginSuccessHandler"></bean>
+<bean id="customPasswordEncoder" class="com.kjy.security.CustomNoOpPasswordEncoder"></bean>
 		  
 <security:http>
 	<!-- 특정 URL 에 접근할 때 인터셉터를 이용해서 접근을 제한하는 설정, pattern 은 URI 의 패턴을 의미  access의 경우는 권한을 체크 -->
@@ -33,12 +34,15 @@
 <security:authentication-manager>
 
 	<security:authentication-provider>
-		<security:user-service>
+		<!-- <security:user-service>
 			<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
 			
-			<!-- admin 접속 권한 설정 -->
+			admin 접속 권한 설정
 			<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
-		</security:user-service>
+		</security:user-service> -->
+	<security:jdbc-user-service data-source-ref="dataSource" /> 
+	
+	<security:password-encoder ref="customPasswordEncoder"/>
 	</security:authentication-provider>
 
 </security:authentication-manager>
