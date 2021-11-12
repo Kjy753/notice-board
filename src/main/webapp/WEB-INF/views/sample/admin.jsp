@@ -13,8 +13,13 @@
 <body>
 <h1>/sample/admin page</h1>
 
+<%-- <sec:authentication property="principal"/> -> UserDetialsService 에서 반환된 객체 즉 CustomUser 객체 --%>
+<p>principal : <sec:authentication property="principal"/></p>
+<p>MemberVO : <sec:authentication property="principal.member"/></p>
+<p>사용자 이름 : <sec:authentication property="principal.member.userName"/></p>
+<p>사용자아이디 : <sec:authentication property="principal.username"/></p>
+<p>사용자 권한 리스트 : <sec:authentication property="principal.member.authList"/></p>
+
 <a href="/customLogout">Logout</a>
-
-
 </body>
 </html>
