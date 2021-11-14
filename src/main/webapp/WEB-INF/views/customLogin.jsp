@@ -1,35 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SB Admin 2 - Bootstrap Admin Theme</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="/resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
-<h1>Custom Login Page</h1>
-<h2><c:out value="${error}"/></h2>
-<h2><c:out value="${logout}"/></h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method='post' action="/login">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="E-mail" name="username" type="type" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember-me" type="checkbox">Remember Me
+                                    </label>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                            </fieldset>
+                            <input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="../resources/vendor/jquery/jquery.min.js"></script>
 
-<form method='post' action="/login">
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-<div>
-	<input type='text' name='username' value='admin'>
-</div>
-<div>
-	<input type='password' name='password' value='admin'>
-</div>
-<div>
-	<input type='checkbox' name='remember-me'> Remember Me
-</div>
-<div>
-	<input type='submit'>
-</div>
-<%-- ${_csrf.parameterName } => EL  --%>
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-</form>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../resources/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../resources/dist/js/sb-admin-2.js"></script>
+    
+    <script>
+    $(".btn-succes").on("click", function(e){
+    	e.preventDefault();
+    	$("form").submit();
+    });
+    </script>
+    
+    <!-- 수정시 신경써야할 부분
+   	- JSTL이나 스프링 시큐리티의 태그를 사용할 수 있도록 선언
+   	- CSS 파일이나 JS 파일의 링크는 절대 경로를 쓰도록 수정 
+   	- <form> 태그 내의 <input> 태그의 name 속성을 스프링 시큐리티에 맞게 수정 
+   	- CSRF 토큰 항목 추가 
+   	- JavaScript를 통한 로그인 전송 -->
 </body>
 </html>
+
+
