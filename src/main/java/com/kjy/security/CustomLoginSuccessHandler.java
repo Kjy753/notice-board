@@ -13,10 +13,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import lombok.extern.log4j.Log4j;
 
-
-
 @Log4j
-public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
+public class CustomLoginSuccessHandler {
+/*implements AuthenticationSuccessHandler{
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -34,19 +33,19 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		log.warn("ROLE NAMES: " + roleNames);
 		
 		if(roleNames.contains("ROLE_ADMIN")) {
-			/* 사용자가 가진 권힌아 ROLE_ADMIN 인경우 admin으로 */
-			response.sendRedirect("/sample/admin");
+			 사용자가 가진 권힌아 ROLE_ADMIN 인경우 admin으로 
+			response.sendRedirect("/board/register");
 			return;
 		}
 		
 		if(roleNames.contains("ROLE_MEMBER")) {
-			/* 사용자가 가진 권힌아 ROLE_ADMIN 인경우 member으로 */ 
+			 사용자가 가진 권힌아 ROLE_ADMIN 인경우 member으로  
 			response.sendRedirect("/sample/member");
 			return;
 		}
 		
 		response.sendRedirect("/");
-	}
+	}*/
 	
 	
 

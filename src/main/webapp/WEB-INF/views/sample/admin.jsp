@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
@@ -13,7 +13,7 @@
 <body>
 <h1>/sample/admin page</h1>
 
-<%-- <sec:authentication property="principal"/> -> UserDetialsService 에서 반환된 객체 즉 CustomUser 객체 --%>
+<sec:authentication property="principal"/> -> UserDetialsService 에서 반환된 객체 즉 CustomUser 객체
 <p>principal : <sec:authentication property="principal"/></p>
 <p>MemberVO : <sec:authentication property="principal.member"/></p>
 <p>사용자 이름 : <sec:authentication property="principal.member.userName"/></p>
@@ -23,3 +23,4 @@
 <a href="/customLogout">Logout</a>
 </body>
 </html>
+ --%>
