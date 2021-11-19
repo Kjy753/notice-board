@@ -3,6 +3,7 @@
        
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@include file="../includes/header.jsp" %>
 
@@ -47,8 +48,14 @@
 	                            	<input type='hidden' name='type' value = '${cri.type }'>
 	                            	<input type='hidden' name='keyword' value = '${cri.keyword }'>
 	                           </form>
-	                           <button type="button" class="btn btn-default listBtn"><a href='/board/list'>List</a></button>
+	                           <sec:authentication property="principal" var="pinfo"/>
+	                           <sec:authorize access="isAuthenticated()">
+	                           <c:if test="${pinfo.username eq board.writer }">
 	                           <button type="button" class="btn btn-default modifyBtn"><a href='/board/modify?bno= <c:out value="${board.bno}"/> '>Modify</a></button>
+	                           </c:if>	
+	                           </sec:authorize>
+	                           <button type="button" class="btn btn-default listBtn"><a href='/board/list'>List</a></button>
+	                           
                         </div> 
                         <!-- /.panel-body -->
                     </div>
@@ -132,7 +139,9 @@
                     	</div> -->
                     	<div class="panel-heading">
                     	<i class="fa fa-comments fa-fw"></i> Reply
+                    	<sec:authorize access="isAuthenticated()">
                     		<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
+                    	</sec:authorize>
                     	</div>
                     	<!-- /.panel-heading -->
                     	<div class="panel-body">
