@@ -23,30 +23,46 @@
                         <!-- /.panel-headifng -->
                         <div class="panel-body">
                            <form role="form" action="/board/modify" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"/>
+							
                            	   <input type='hidden' name='pageNum' value='${cri.pageNum }'>
                            	   <input type='hidden' name='amount' value='${cri.amount }'>
                            	   <input type='hidden' name='type' value = '${cri.type }'>
 	                           <input type='hidden' name='keyword' value = '${cri.keyword }'>
-	                           <input type='hidden' name="${_csrf.parameterName}" value="${_csrf.token }"/>
-                        	   <div class="form-group">
-	                           		<label>BNO</label>
-	                           		<input class="form-control" name="bno" readonly="readonly" value= '<c:out value="${board.bno}"/>'>
-	                           </div>
-                        
-	                           <div class="form-group">
-	                           		<label>Title</label>
-	                           		<input class="form-control" name="title"  value= '<c:out value="${board.title}"/>'>
-	                           </div>
 	                           
 	                           <div class="form-group">
-	                           		<label>Content</label>
-	                           		<textarea rows="5" cols="50" name="content" class="form-control"> '<c:out value="${board.title}"/>'</textarea>
-                               </div>
-	                           
-	                           <div class="form-group">
-	                           		<label>Writer</label>
-	                           		<input class="form-control" name="writer" value= '<c:out value="${board.title}"/>'>
-	                           </div>
+								  <label>Bno</label> 
+								  <input class="form-control" name='bno' readonly="readonly" value= '<c:out value="${board.bno}"/>'>
+								</div>
+								
+								<div class="form-group">
+								  <label>Title</label> 
+								  <input class="form-control" name="title"  value= '<c:out value="${board.title}"/>'>
+								</div>
+								
+								<div class="form-group">
+								  <label>Text area</label>
+								  <textarea class="form-control" rows="3" name='content' ><c:out value="${board.content}"/></textarea>
+								</div>
+								
+								<div class="form-group">
+								  <label>Writer</label> 
+								  <input class="form-control" name='writer' value='<c:out value="${board.writer}"/>' readonly="readonly">    
+								            
+								</div>
+								
+								<div class="form-group">
+								  <label>RegDate</label> 
+								  <input class="form-control" name='regDate'
+								    value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.regdate}" />'  readonly="readonly">            
+								</div>
+								
+								<div class="form-group">
+								  <label>Update Date</label> 
+								  <input class="form-control" name='updateDate'
+								    value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.updateDate}" />'  readonly="readonly">            
+								</div>
+                        	  
 							   <sec:authentication property="principal" var="pinfo"/>
 							   <sec:authorize access="isAuthenticated()">
 							   <c:if test="${pinfo.username eq board.writer }">
@@ -171,7 +187,7 @@ $(document).ready(function() {
 		}else if(operation === 'modify'){
 		
 			console.log("submit clicked");
-			
+		
 			var str = "";
 			
 			$(".uploadResult ul li").each(function(i, obj){
@@ -186,7 +202,7 @@ $(document).ready(function() {
 				
 			});
 			formObj.append(str).submit();
-	}
+		}
 		formObj.submit();
 	});
 	
@@ -257,7 +273,8 @@ function checkExtension(fileName, fileSize){
 		}
 		return true;
 	}
-	
+	var csrfHeaderName ="${_csrf.headerName}"; 
+	var csrfTokenValue="${_csrf.token}";
 $("input[type='file']").change(function(e){
 
 	var formData = new FormData();
@@ -281,6 +298,9 @@ $("input[type='file']").change(function(e){
 		processData: false,
 		contentType: false,data:
 			formData,type: 'POST',
+			beforeSend: function(xhr) {
+		          xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		      },
 			dataType: 'json',
 			success: function(result){
 				console.log(result);

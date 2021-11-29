@@ -88,7 +88,7 @@ public class BoardController {
 	
 	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
-	public String modigy(BoardVO board, Criteria cri, RedirectAttributes rttr) {
+	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("modify: "+ board);
 		 
