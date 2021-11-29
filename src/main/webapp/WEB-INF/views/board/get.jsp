@@ -260,11 +260,13 @@
 		var modalRemoveBtn = $("#modalRemoveBtn");
 		var modalRegisterBtn = $("#modalRegisterBtn");
 		
+		
 	
 		$("#addReplyBtn").on("click", function(e){
 			console.log("=========");
 			console.log("addReplyBtn  TEST");
 			modal.find("input").val("");
+			modal.find("input[name='replyer']").val(replyer);
 			modalInputReplyDate.closest("div").hide();
 			modal.find("button[id != 'modalCloseBtn']").hide();
 			
@@ -272,6 +274,12 @@
 			
 			$(".modal").modal("show");
 		});
+		
+		//Ajax spring security header...
+		$(document).ajaxSend(function(e, xhr, options){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		});
+		
 		
 		modalRegisterBtn.on("click", function(e){
 
@@ -397,6 +405,15 @@
 			
 			showList(pageNum);
 		});
+		
+		var replyer = null;
+		
+		<sec:authorize access="isAuthenticated()">
+		replyer = '<sec:authentication property="principal.username"/>';
+		</sec:authorize>
+		
+		var csrfHeaderName ="${_csrf.headerName}";
+		var csrfTokenValue="${_csrf.token}";
 });
 	
 	//테스트
