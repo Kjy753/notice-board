@@ -86,6 +86,7 @@ public class BoardController {
 		model.addAttribute("board", service.get(bno));
 	}
 	
+	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
 	public String modigy(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		
@@ -105,8 +106,9 @@ public class BoardController {
 		return "redirect:/board/list" + cri.getListLink();
 	}
 	
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
-	public String removd(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
+	public String removd(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr, String writer ) {
 		
 		log.info("remove :" + bno);
 		
@@ -116,6 +118,7 @@ public class BoardController {
 			
 			// deltet Attach FIles
 			deleteFiles(attachList);
+			
 			rttr.addFlashAttribute("result","success");
 		}
 		

@@ -3,6 +3,7 @@
        
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@include file="../includes/header.jsp" %>
 
@@ -26,6 +27,7 @@
                            	   <input type='hidden' name='amount' value='${cri.amount }'>
                            	   <input type='hidden' name='type' value = '${cri.type }'>
 	                           <input type='hidden' name='keyword' value = '${cri.keyword }'>
+	                           <input type='hidden' name="${_csrf.parameterName}" value="${_csrf.token }"/>
                         	   <div class="form-group">
 	                           		<label>BNO</label>
 	                           		<input class="form-control" name="bno" readonly="readonly" value= '<c:out value="${board.bno}"/>'>
@@ -45,9 +47,14 @@
 	                           		<label>Writer</label>
 	                           		<input class="form-control" name="writer" value= '<c:out value="${board.title}"/>'>
 	                           </div>
-                           
+							   <sec:authentication property="principal" var="pinfo"/>
+							   <sec:authorize access="isAuthenticated()">
+							   <c:if test="${pinfo.username eq board.writer }">
+							                              	
 	                           <button type="submit" class="btn btn-default" data-oper='modify'>Modify</button>
 	                           <button type="submit" class="btn btn-danger" data-oper='remove'>Remove</button>
+	                           </c:if>
+							   </sec:authorize>
 	                           <button type="submit" class="btn btn-info" data-oper='list'>List</button> 
                            </form>
                         </div>
