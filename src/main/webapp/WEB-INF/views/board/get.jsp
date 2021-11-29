@@ -339,8 +339,24 @@
 		modalRemoveBtn.on("click", function(e){
 			
 			var rno = modal.data("rno");
+			console.log("RNO: " + rno);
+			console.log("REPLYER: " + replyer);
 			
-			replyService.remove(rno, function(result){
+			if(!replyer){
+				alert("로그인후 삭제가 가능 합니다.");
+				modal.modal("hide");
+				return;
+			}
+			var originalReplyer = modalInputReplyer.val();
+			console.log("Original Replyer: " + originalReplyer); // 댓글의 원 작성자 
+			
+			if(replyer != originalReplyer){
+				alert("자신이 작성한 댓글만 삭제가 가능합니다.");
+				modal.modal("hide");
+				return;
+			}
+			
+			replyService.remove(rno, originalReplyer, function(result){
 				
 				alert(result);
 				
@@ -350,6 +366,16 @@
 			
 			});
 		});
+		
+		var replyer = null;
+		
+		<sec:authorize access="isAuthenticated()">
+		replyer = '<sec:authentication property="principal.username"/>';
+		</sec:authorize>
+		
+		var csrfHeaderName ="${_csrf.headerName}";
+		var csrfTokenValue="${_csrf.token}";
+		
 		// 댓글 페이지번호를 출력 하기 위한 로직
 		var pageNum = 1;
 		var replyPageFooter = $(".panel-footer");
@@ -406,14 +432,7 @@
 			showList(pageNum);
 		});
 		
-		var replyer = null;
 		
-		<sec:authorize access="isAuthenticated()">
-		replyer = '<sec:authentication property="principal.username"/>';
-		</sec:authorize>
-		
-		var csrfHeaderName ="${_csrf.headerName}";
-		var csrfTokenValue="${_csrf.token}";
 });
 	
 	//테스트
